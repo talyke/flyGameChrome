@@ -1,26 +1,56 @@
+import { updateStars, setupStars } from './stars.js'
+
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
-import { updateStarTrail } from './stars.js'
+const SPEED_SCALE_INCREASE = .00001
+
 
 const worldElem = document.querySelector('[data-world]')
+const scoreElem = document.querySelector('[data-world]')
+const startScreenElem = document.querySelector('[data-start-screen]')
 
 setPixelWorldToScale()
-window.addEventListener("resize", setPixelToWorldSacle)
+window.addEventListener("resize", setPixelWorldToScale)
+document.addEventListener("keydown", handleStart, { once: true})
 
-let lastTime = 0
+setupStars()
+
+let lastTime
+let speedScale
 function update(time) {
-    const delta = time - lastTime
-    console.log(delta)
+    if (lastTime == null) {
     lastTime = time
     window.requestAnimationFrame(update)
     return
 }
+const delta = time - lastTime
+
+updateStars(delta, speedScale)
+updateSpeedScale(delta)
+
+lastTime = time
 window.requestAnimationFrame(update)
+}
 
-updateStars(delta)
+function updateSpeedScale(delta) {
+    speedScale += delta * SPEED_SCALE_INCREASE
+}
 
+function updateScore(delta) {
+ score =+ delta * .01
+ scoreElem.textContent = Math.floor(score)
+}
 
-function setPixelWorldSTocale() {
+function handleStart() {
+    lastTime = null
+    speedScale = 1
+    score = 0
+    setupStars()
+    startScreenElem.classList.add("hide")
+    window.requestAnimationFrame(update)
+}
+
+function setPixelWorldToScale() {
     let worldPixelScale
     if (window.innerWidth / window.innerHeight < WORLD_WIDTH / WORLD_HEIGHT) {
         worldPixelScale = window.innerWidth / WORLD_WIDTH
