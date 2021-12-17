@@ -20,6 +20,10 @@ export function setupFly() {
     document.addEventListener("keydown", onJump)
 }
 
+export function setFlyLose() {
+    flyElem.src = "imgs/sad-fly.jpg"
+}
+
 export function updateFly(delta, speedScale) {
     handleRun(delta, speedScale)
     handleJump(delta)
@@ -56,4 +60,8 @@ function onJump(e) {
 
     yVelocity = JUMP_SPEED
     isJumping = true
+}
+
+export function getFlyRect() {
+    return flyElem.getBoundingClientRect()
 }

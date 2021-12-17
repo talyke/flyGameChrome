@@ -28,6 +28,14 @@ export function updateShiny(delta, speedScale) {
     nextShinyTime -= delta
 }
 
+export function getShinyRects() {
+    return [...document.querySelectorAll("[data-shiny]")].map(cactus => {
+        {
+            return shiny.getBoundingClientRect()
+        }
+    })
+}
+
 function createShiny() {
     const shiny = document.createElement("div")
     shiny.dataset.shiny = true
