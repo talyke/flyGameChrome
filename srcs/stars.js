@@ -1,7 +1,7 @@
 import { getCustomProperty, incrementCustomProperty, setCustomProperty } from './updateCustomProperty.js'
 
 const SPEED = 0.05
-const starsELems = document.querySelectorAll('[data-stars]')
+const starsELems = document.querySelectorAll("[data-stars]")
 
 export function setupStars() {
    setCustomProperty(starsElems[0], "--left", 0)

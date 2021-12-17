@@ -51,7 +51,7 @@
     bottom: calc(var(--bottom) * 1%);
   }
   
-  .cactus {
+  .shiny {
     position: absolute;
     left: calc(var(--left) * 1%);
     height: 30%;
